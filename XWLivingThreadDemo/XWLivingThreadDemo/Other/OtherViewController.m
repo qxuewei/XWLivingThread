@@ -9,20 +9,8 @@
 #import "OtherViewController.h"
 #import "XWLivingThread.h"
 
-@interface XWThread2 : NSThread
-@end
-@implementation XWThread2
-
-- (void)dealloc {
-    NSLog(@"%s",__func__);
-}
-
-@end
-
 @interface OtherViewController ()
 @property (nonatomic, strong) XWLivingThread *livingThread;
-
-@property (nonatomic, strong) XWThread2 *thread;
 @end
 
 @implementation OtherViewController
@@ -30,25 +18,10 @@
 #pragma mark - system
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"另外一个控制器";
-    self.view.backgroundColor = [UIColor purpleColor];
+    [self setupUI];
     
     /// 初始化实例对象, 会跟随当前控制器销魂而自动销魂常驻线程
     self.livingThread = [[XWLivingThread alloc] init];
-    
-//    self.thread = [[XWThread2 alloc] initWithTarget:self selector:@selector(threadMethod) object:nil];
-//    [self.thread start];
-}
-
-- (void)threadMethod {
-    NSLog(@"threadMethod");
-    
-    @autoreleasepool {
-        NSLog(@"current thread = %@", [NSThread currentThread]);
-        NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-        [runLoop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
-        [runLoop runMode:NSRunLoopCommonModes beforeDate:[NSDate distantFuture]];
-    }
 }
 
 - (void)dealloc {
@@ -58,21 +31,32 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
     
-    __weak typeof(self) weakSelf = self;
-    
-//    [self.livingThread executeTask:^{
-//        NSLog(@"在 %@ 控制器, 执行某操作 在 %@ 线程",NSStringFromClass(weakSelf.class),[NSThread currentThread]);
-//    }];
-    
-    
+    /// 功能1
 //    [XWLivingThread executeTask:^{
-//        NSLog(@"在 %@ 控制器, 执行某操作 在 %@ 线程",NSStringFromClass(weakSelf.class),[NSThread currentThread]);
+//        NSLog(@"在 %@ 控制器, 执行某操作 在 %@ 线程",NSStringFromClass(self.class),[NSThread currentThread]);
 //    }];
     
-    [XWLivingThread executeTask:^{
+    /// 功能2
+//    [XWLivingThread executeTask:^{
+//        NSLog(@"在 %@ 控制器, 执行某操作 在 %@ 线程",NSStringFromClass(self.class),[NSThread currentThread]);
+//    } identity:@"123"];
+    
+    /// 功能3
+    __weak typeof(self) weakSelf = self;
+    [self.livingThread executeTask:^{
         NSLog(@"在 %@ 控制器, 执行某操作 在 %@ 线程",NSStringFromClass(weakSelf.class),[NSThread currentThread]);
-    } identity:@"123"];
+    }];
 }
 
 #pragma mark - private
+- (void)setupUI {
+    self.title = @"另外一个控制器";
+    self.view.backgroundColor = [UIColor purpleColor];
+    UILabel *label = [[UILabel alloc] init];
+    label.text = @"点击屏幕任意位置执行打印操作";
+    label.textColor = UIColor.whiteColor;
+    [label sizeToFit];
+    label.center = self.view.center;
+    [self.view addSubview:label];
+}
 @end

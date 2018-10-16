@@ -32,6 +32,7 @@ static NSMutableDictionary *xw_threadDictM;
         void (^creatThreadBlock)(void) = ^ {
             NSRunLoop *currentRunLoop = [NSRunLoop currentRunLoop];
             [currentRunLoop addPort:[NSPort new] forMode:NSDefaultRunLoopMode];
+            [[NSRunLoop currentRunLoop] run];
             while (1) {
                 [currentRunLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
             }

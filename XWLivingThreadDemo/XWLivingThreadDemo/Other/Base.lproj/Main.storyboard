@@ -30,19 +30,11 @@
                                     <action selector="toOtherViewController:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eQN-g4-Q9X"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击屏幕任意位置执行打印操作" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xbd-6a-RSr">
-                                <rect key="frame" x="66" y="448.5" width="243" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Xbd-6a-RSr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7om-da-OxW"/>
                             <constraint firstItem="CrQ-rp-B8m" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UbF-wt-G7F"/>
                             <constraint firstItem="CrQ-rp-B8m" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bu7-zb-DiK"/>
-                            <constraint firstItem="Xbd-6a-RSr" firstAttribute="top" secondItem="CrQ-rp-B8m" secondAttribute="bottom" constant="100" id="vaA-04-5iC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Opl-cS-mMl"/>
